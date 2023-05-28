@@ -1,8 +1,9 @@
 """
 Bicycle Module
 
-This module defines the Bicycle class that represents a bicycle object. It provides functionality for
-accelerating, braking and slowing down the bicycle, as well as printing the object's information.
+This module defines the Bicycle class that represents a bicycle object.
+It provides functionality for accelerating,
+braking and slowing down the bicycle, as well as printing the object's information.
 
 Author: Anna
 Date: May 16, 2023
@@ -10,14 +11,15 @@ Date: May 16, 2023
 import sys
 from abc import ABC
 
-from models.AbstractBicycle import AbstractBicycle
+from models.abstract_bicycle import AbstractBicycle
 
 
 class Bicycle(AbstractBicycle, ABC):
     """constructor of class"""
 
-    def __init__(self, type_of_bicycle="None", brand="None", max_speed=0, current_speed=0):
+    def __init__(self, type_of_bicycle="None", brand="None", max_speed=0, current_speed=0, the_best_qualities=None):
         super().__init__(type_of_bicycle, brand, max_speed, current_speed)
+        self._the_best_qualities = the_best_qualities
 
     __instance = None
 
@@ -30,11 +32,11 @@ class Bicycle(AbstractBicycle, ABC):
 
     def accelerate(self, speed):
         """accelerate = accelerate the bicycle by thу specified speed"""
-        if speed < self.__max_speed:
+        if speed < self._max_speed:
             self.__current_speed += speed
             return self.__current_speed
 
-        return self.__max_speed
+        return self._max_speed
 
     def brake(self):
         """brake = stop the bicycle"""
@@ -50,8 +52,7 @@ class Bicycle(AbstractBicycle, ABC):
 
     def __str__(self):
         """print objects by the specified pattern"""
-        return f"Bicycle: type={self.type_of_bicycle}, brand={self.brand}, " \
-               f"maxSpeed={self.max_speed}, currentSpeed={self.current_speed}"
+        return f"{super().__str__()}"
 
     def get_max_distance(self):
         """Return the maximum distance the bicycle can travel."""

@@ -13,11 +13,13 @@ class ElectricBicycle(AbstractBicycle):
 
     def __init__(self, type_of_bicycle="None", brand="None", max_speed=0,
                  current_speed=0, capacity_of_battery=0,
-                 energy_consumption_per_100_m=0):
+                 energy_consumption_per_100_m=0,
+                 the_best_qualities=None):
         """ Initialize an ElectricBicycle object. """
         super().__init__(type_of_bicycle, brand, max_speed, current_speed)
         self.__capacity_of_battery = capacity_of_battery
         self.__energy_consumption_per_100_m = energy_consumption_per_100_m
+        self._the_best_qualities = the_best_qualities
 
     def get_max_distance(self):
         """Calculate and return the maximum distance
@@ -36,6 +38,6 @@ class ElectricBicycle(AbstractBicycle):
 
     def __str__(self):
         """Return a string representation of the ElectricBicycle object."""
-        return f"{super().__str__()}, "\
+        return f"{super().__str__()}, " \
                f"capacity_of_battery={self.capacity_of_battery}, " \
                f"energy_consumption_per_100_m={self.energy_consumption_per_100_m}"

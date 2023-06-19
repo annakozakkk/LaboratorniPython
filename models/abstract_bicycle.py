@@ -40,6 +40,7 @@ class AbstractBicycle(ABC):
                     return func(*args, **kwargs)
                 except exception as e:
                     logger.exception(e)
+                    raise e
                 finally:
                     logger.removeHandler(console_handler) if mode == 'console' else logger.removeHandler(file_handler)
 
@@ -56,7 +57,7 @@ class AbstractBicycle(ABC):
 
         """
 
-    @logged(BicycleBrakeException, 'console')
+    @logged(BicycleBrakeException, 'file')
     def brake(self, speed):
         """brake = stop the bicycle"""
         if speed == 0:

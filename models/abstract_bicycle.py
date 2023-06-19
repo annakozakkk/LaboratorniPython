@@ -4,6 +4,8 @@ This module contains an abstract base class (ABC) representing a bicycle.
 The AbstractBicycle class defines the common attributes and methods that a bicycle should have. It provides the blueprint for derived classes to implement their specific functionality.
 """
 from abc import ABC, abstractmethod
+from exceptions.bicycle_brake_exception import BicycleBrakeException
+import logging
 
 
 class AbstractBicycle(ABC):
@@ -20,6 +22,32 @@ class AbstractBicycle(ABC):
     def __iter__(self):
         return iter(self._the_best_qualities)
 
+    @staticmethod
+    def logged(exception, mode):
+        def decorator(func):
+            def wrapper(*args, **kwargs):
+                logger = logging.getLogger(__name__)
+                console_handler = logging.StreamHandler()
+                file_handler = logging.FileHandler("C:/Users/SV/Python/log.txt")
+                if mode == 'console':
+                    logger.addHandler(console_handler)
+                elif mode == 'file':
+                    logger.addHandler(file_handler)
+                else:
+                    raise ValueError("Invalid logging mode")
+
+                try:
+                    return func(*args, **kwargs)
+                except exception as e:
+                    logger.exception(e)
+                    raise e
+                finally:
+                    logger.removeHandler(console_handler) if mode == 'console' else logger.removeHandler(file_handler)
+
+            return wrapper
+
+        return decorator
+
     @abstractmethod
     def get_max_distance(self):
         """
@@ -28,9 +56,20 @@ class AbstractBicycle(ABC):
         This method must be implemented by the derived classes.
 
         """
+
+    @logged(BicycleBrakeException, 'file')
+    def brake(self, speed):
+        """brake = stop the bicycle"""
+        if speed == 0:
+            raise BicycleBrakeException("bicycle is already stoped")
+
+        speed = 0
+        return speed
+
     @property
     def the_best_qualities(self):
         return self._the_best_qualities
+
     @property
     def brand(self):
         """Get the brand of the bicycle."""
@@ -57,15 +96,14 @@ class AbstractBicycle(ABC):
                f"maxSpeed={self.max_speed}, currentSpeed={self.current_speed}, " \
                f"the_best_quantities={self._the_best_qualities}"
 
-
     def get_attributes_by_type(obj, data_type):
         """
-           Return a dictionary of attributes from the object that have values of the specified data type.
+            Return a dictionary of attributes from the object that have values of the specified data type.
 
-           Args:
-               obj: The object from which to extract attributes.
-               data_type: The data type to filter attributes by.
+            Args:
+                obj: The object from which to extract attributes.
+                data_type: The data type to filter attributes by.
 
-           Returns:
-               A dictionary containing the attributes and their corresponding values that have the specified data type."""
+            Returns:
+                A dictionary containing the attributes and their corresponding values that have the specified data type."""
         return {key: value for key, value in obj.__dict__.items() if isinstance(value, data_type)}

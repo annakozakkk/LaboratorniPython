@@ -28,7 +28,7 @@ class AbstractBicycle(ABC):
             def wrapper(*args, **kwargs):
                 logger = logging.getLogger(__name__)
                 console_handler = logging.StreamHandler()
-                file_handler = logging.FileHandler("C:/Users/SV/Python/log.txt")
+                file_handler = logging.FileHandler("C:/Python02/LaboratorniPython/log.txt")
                 if mode == 'console':
                     logger.addHandler(console_handler)
                 elif mode == 'file':

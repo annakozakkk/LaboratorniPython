@@ -4,7 +4,7 @@ from models.bicycle import Bicycle
 from models.electric_bicycle import ElectricBicycle
 from models.electric_scooter import ElectricScooter
 from models.gyro_scooter import GyroScooter
-
+from exceptions.bicycle_brake_exception import BicycleBrakeException
 
 def main():
     bicycle_manager = BicycleManager()
@@ -37,7 +37,8 @@ def main():
     print(bicycle_manager.all_and_any(condition))
     print(bicycle_manager.result_of_get_max_distance())
     print(bicycle_manager.enumerate_objects())
-    print(bicycle1.__dict__)
+
+    bicycle1.brake(0)
 
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ Date: May 16, 2023
 import sys
 from abc import ABC
 
+
 from models.abstract_bicycle import AbstractBicycle
 
 
@@ -38,10 +39,7 @@ class Bicycle(AbstractBicycle, ABC):
 
         return self._max_speed
 
-    def brake(self):
-        """brake = stop the bicycle"""
-        self.__current_speed = 0
-        return self.__current_speed
+
 
     def slow_down(self, speed):
         """slow_down = slow down the bicycle by the specified speed"""

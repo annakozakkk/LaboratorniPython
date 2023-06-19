@@ -15,6 +15,10 @@ class AbstractBicycle(ABC):
         self._brand = brand
         self._max_speed = max_speed
         self._current_speed = current_speed
+        self._the_best_qualities = set()
+
+    def __iter__(self):
+        return iter(self._the_best_qualities)
 
     @abstractmethod
     def get_max_distance(self):
@@ -24,7 +28,9 @@ class AbstractBicycle(ABC):
         This method must be implemented by the derived classes.
 
         """
-
+    @property
+    def the_best_qualities(self):
+        return self._the_best_qualities
     @property
     def brand(self):
         """Get the brand of the bicycle."""
@@ -48,4 +54,18 @@ class AbstractBicycle(ABC):
     def __str__(self):
         """print objects by the specified pattern"""
         return f"Bicycle: type={self.type_of_bicycle}, brand={self.brand}, " \
-               f"maxSpeed={self.max_speed}, currentSpeed={self.current_speed}"
+               f"maxSpeed={self.max_speed}, currentSpeed={self.current_speed}, " \
+               f"the_best_quantities={self._the_best_qualities}"
+
+
+    def get_attributes_by_type(obj, data_type):
+        """
+           Return a dictionary of attributes from the object that have values of the specified data type.
+
+           Args:
+               obj: The object from which to extract attributes.
+               data_type: The data type to filter attributes by.
+
+           Returns:
+               A dictionary containing the attributes and their corresponding values that have the specified data type."""
+        return {key: value for key, value in obj.__dict__.items() if isinstance(value, data_type)}

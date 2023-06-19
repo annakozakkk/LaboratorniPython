@@ -11,12 +11,13 @@ class GyroScooter(AbstractBicycle):
     """A class representing a gyro scooter, derived from AbstractBicycle."""
 
     def __init__(self, type_of_bicycle="None", brand="None", max_speed=0, current_speed=0,
-                 capacity_of_battery=0, battery_voltage=0, energy_consumption_per_1_km=0):
+                 capacity_of_battery=0, battery_voltage=0, energy_consumption_per_1_km=0, the_best_qualities=None):
         """ Initialize a GyroScooter object."""
         super().__init__(type_of_bicycle, brand, max_speed, current_speed)
         self.__capacity_of_battery = capacity_of_battery
         self.__battery_voltage = battery_voltage
         self.__energy_consumption_per_1_km = energy_consumption_per_1_km
+        self._the_best_qualities = the_best_qualities
 
     def get_max_distance(self):
         """  Calculate and return the maximum distance

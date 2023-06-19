@@ -12,11 +12,12 @@ class ElectricScooter(AbstractBicycle):
     """A class representing an electric scooter, derived from AbstractBicycle."""
 
     def __init__(self, type_of_bicycle="None", brand="None", max_speed=0, current_speed=0,
-                 time_to_drive_on_battery_charge=0, average_speed=0):
+                 time_to_drive_on_battery_charge=0, average_speed=0, the_best_qualities=None):
         """ Initialize an ElectricScooter object."""
         super().__init__(type_of_bicycle, brand, max_speed, current_speed)
         self.__time_to_drive_on_battery_charge = time_to_drive_on_battery_charge
         self.__average_speed = average_speed
+        self._the_best_qualities= the_best_qualities
 
     def get_max_distance(self):
         """Calculate and return the maximum distance
